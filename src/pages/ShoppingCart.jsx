@@ -12,12 +12,16 @@ const ShoppingCart = () => {
     console.log("🧪 Procediendo al pago con los siguientes productos:", cartItems);
 
     try {
-      fetch('https://backend-tienda-h0yw.onrender.com/api/create-checkout-session', {
-
+      const response = await fetch('https://backend-tienda-h0yw.onrender.com/api/create-checkout-session', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cartItems }),
       });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Error del servidor: ${response.status} - ${errorText}`);
+      }
 
       const data = await response.json();
       console.log("🎯 Respuesta del backend Stripe:", data);
