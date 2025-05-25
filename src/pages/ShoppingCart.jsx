@@ -12,7 +12,8 @@ const ShoppingCart = () => {
     console.log("🧪 Procediendo al pago con los siguientes productos:", cartItems);
 
     try {
-      const response = await fetch("http://localhost:3000/api/create-checkout-session", {
+      fetch('https://backend-tienda-h0yw.onrender.com/api/create-checkout-session', {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cartItems }),
