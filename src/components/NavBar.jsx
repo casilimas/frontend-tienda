@@ -16,7 +16,7 @@ const NavBar = () => {
 
   const [toneIndex, setToneIndex] = useState(0);
   const [ascending, setAscending] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false); 
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,8 +41,7 @@ const NavBar = () => {
     <nav className={`fixed top-0 mt-4 w-full ${bgClass} text-black transition-colors duration-500 z-50 shadow-md`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex items-center justify-between h-16">
-          
-          {/* Logo girando lento + rápido al hover */}
+          {/* Logo */}
           <Link to="/">
             <img
               src="/logoUno.png"
@@ -72,7 +71,7 @@ const NavBar = () => {
             </button>
           </div>
 
-          {/* Menú principal */}
+          {/* Menú Desktop */}
           <ul className="hidden sm:flex space-x-6 items-center">
             <li><Link to="/">Inicio</Link></li>
             <li><Link to="/ofertas">Ofertas</Link></li>
@@ -103,7 +102,7 @@ const NavBar = () => {
           </ul>
         </div>
 
-        {/* Menú móvil */}
+        {/* Menú Móvil */}
         {menuOpen && (
           <ul className="sm:hidden mt-4 space-y-3 pb-4">
             <li><Link to="/" onClick={() => setMenuOpen(false)}>Inicio</Link></li>
@@ -114,7 +113,23 @@ const NavBar = () => {
             <li><Link to="/about/accesorios" onClick={() => setMenuOpen(false)}>Accesorios</Link></li>
             <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contacto</Link></li>
             <li><Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link></li>
-            <li><Link to="/cart" onClick={() => setMenuOpen(false)}>Carrito ({itemCount})</Link></li>
+            <li>
+              <div className="relative flex items-center gap-2 pl-4">
+                <Link
+                  to="/cart"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2"
+                >
+                  <img src="/carrito.png" alt="Carrito" className="w-6 h-6" />
+                  <span className="text-sm">Carrito</span>
+                </Link>
+                {itemCount > 0 && (
+                  <span className="absolute -top-2 right-0 bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                    {itemCount}
+                  </span>
+                )}
+              </div>
+            </li>
           </ul>
         )}
       </div>
